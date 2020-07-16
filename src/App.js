@@ -6,6 +6,7 @@ import "./App.scss";
 import HomePage from "./pages/homepage/HomePage";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
+import Authentication from "./pages/authentication/authentication.component";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/signin" component={Authentication} />
         </Switch>
       </Router>
     </div>
