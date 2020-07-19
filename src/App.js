@@ -6,7 +6,8 @@ import "./App.scss";
 import HomePage from "./pages/homepage/HomePage";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
-import Authentication from "./pages/authentication/authentication.component";
+import SignIn from "./components/sign-in/sign-in.component";
+import SignUp from "./components/sign-up/sign-up.component";
 
 import { auth, createUserProfile } from "./firebase/firebase.utils";
 
@@ -35,7 +36,6 @@ class App extends React.Component {
           });
         });
       }
-
       this.setState({ currentUser: userAuth });
     });
   }
@@ -52,7 +52,8 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/shop" component={ShopPage} />
-            <Route exact path="/signin" component={Authentication} />
+            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/signup" component={SignUp} />
           </Switch>
         </Router>
       </div>
