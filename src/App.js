@@ -1,5 +1,7 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 import "./App.scss";
 
@@ -46,17 +48,19 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <Provider store={store}>
         <Router>
-          <Header currentUser={this.state.currentUser} />
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/shop" component={ShopPage} />
-            <Route exact path="/signin" component={SignIn} />
-            <Route exact path="/signup" component={SignUp} />
-          </Switch>
+          <div className="App">
+            <Header currentUser={this.state.currentUser} />
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route exact path="/shop" component={ShopPage} />
+              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/signup" component={SignUp} />
+            </Switch>
+          </div>
         </Router>
-      </div>
+      </Provider>
     );
   }
 }
