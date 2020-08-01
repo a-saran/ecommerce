@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import CartIcon from "../cart-icon";
+import CartIcon from "../cart/cart-icon";
 
 import "./header.styles.scss";
 
