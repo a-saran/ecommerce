@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { ReactComponent as ShoppingIcon } from "../../../assets/shopping-bag.svg";
 import CartDropdown from "../cart-dropdown";
 
+import { selectCartItemsCount } from "../../../redux/cart/selector";
+
 import "./styles.scss";
 
-const CartIcon = () => {
+const CartIcon = ({ itemsCount }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -13,10 +16,14 @@ const CartIcon = () => {
         className="shopping-icon"
         onClick={() => setIsOpen(!isOpen)}
       />
-      <span className="item-count">0</span>
+      <span className="item-count">{itemsCount}</span>
       <CartDropdown isOpen={isOpen} />
     </div>
   );
 };
 
-export default CartIcon;
+const mapStateToProps = state => ({
+  itemsCount: selectCartItemsCount(state)
+});
+
+export default connect(mapStateToProps)(CartIcon);
