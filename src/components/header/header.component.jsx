@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { auth } from "../../firebase/firebase.utils";
+import { selectCurrentUser } from "../../redux/user/selector";
 
+import { auth } from "../../firebase/firebase.utils";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart/cart-icon";
 
@@ -44,8 +45,8 @@ const Header = ({ currentUser }) => {
   );
 };
 
-const mapStateToProps = ({ user: { currentUser } }) => ({
-  currentUser
+const mapStateToProps = state => ({
+  currentUser: selectCurrentUser(state)
 });
 
 export default connect(mapStateToProps)(Header);

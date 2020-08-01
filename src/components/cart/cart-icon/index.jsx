@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import { ReactComponent as ShoppingIcon } from "../../../assets/shopping-bag.svg";
 import CartDropdown from "../cart-dropdown";
 
@@ -22,8 +23,8 @@ const CartIcon = ({ itemsCount }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  itemsCount: selectCartItemsCount(state)
+const mapStateToProps = createStructuredSelector({
+  itemsCount: selectCartItemsCount
 });
 
 export default connect(mapStateToProps)(CartIcon);
