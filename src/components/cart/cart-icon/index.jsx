@@ -11,14 +11,16 @@ import "./styles.scss";
 const CartIcon = ({ itemsCount }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const toggleDropDown = () => setIsOpen(!isOpen);
+
   return (
     <div className="cart-icon">
       <ShoppingIcon
         className="shopping-icon"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => toggleDropDown()}
       />
       <span className="item-count">{itemsCount}</span>
-      <CartDropdown isOpen={isOpen} />
+      <CartDropdown isOpen={isOpen} toggleDropDown={toggleDropDown} />
     </div>
   );
 };
