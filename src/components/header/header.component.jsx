@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
+import CartIcon from "../cart-icon";
 
 import "./header.styles.scss";
 
@@ -22,9 +23,12 @@ const Header = ({ currentUser }) => {
         </Link>
 
         {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}>
-            Sign Out
-          </div>
+          <Fragment>
+            <div className="option" onClick={() => auth.signOut()}>
+              Sign Out
+            </div>
+            <CartIcon />
+          </Fragment>
         ) : (
           <Fragment>
             <Link className="option" to="/signin">
