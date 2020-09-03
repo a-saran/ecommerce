@@ -11,8 +11,7 @@ import {
   HeaderContainer,
   LogoContainer,
   OptionsContainer,
-  OptionLink,
-  OptionDiv
+  OptionLink
 } from "./header.styles";
 
 const Header = ({ currentUser }) => {
@@ -27,7 +26,9 @@ const Header = ({ currentUser }) => {
 
         {currentUser ? (
           <Fragment>
-            <OptionDiv onClick={() => auth.signOut()}>Sign Out</OptionDiv>
+            <OptionLink as="div" onClick={() => auth.signOut()}>
+              Sign Out
+            </OptionLink>
             <CartIcon />
           </Fragment>
         ) : (
