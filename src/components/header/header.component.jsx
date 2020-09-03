@@ -7,41 +7,37 @@ import { auth } from "../../firebase/firebase.utils";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart/cart-icon";
 
-import "./header.styles.scss";
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionsContainer,
+  OptionLink,
+  OptionDiv
+} from "./header.styles";
 
 const Header = ({ currentUser }) => {
   return (
-    <div className="header">
-      <Link to="/">
-        <Logo className="logo" />
-      </Link>
-      <div className="options">
-        <Link className="option" to="/shop">
-          Shop
-        </Link>
-        <Link className="option" to="/shop">
-          Contact
-        </Link>
+    <HeaderContainer>
+      <LogoContainer to="/">
+        <Logo />
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionLink to="/shop">Shop</OptionLink>
+        <OptionLink to="/shop">Contact</OptionLink>
 
         {currentUser ? (
           <Fragment>
-            <div className="option" onClick={() => auth.signOut()}>
-              Sign Out
-            </div>
+            <OptionDiv onClick={() => auth.signOut()}>Sign Out</OptionDiv>
             <CartIcon />
           </Fragment>
         ) : (
           <Fragment>
-            <Link className="option" to="/signin">
-              SignIn
-            </Link>
-            <Link className="option" to="/signup">
-              SignUp
-            </Link>
+            <OptionLink to="/signin">SignIn</OptionLink>
+            <OptionLink to="/signup">SignUp</OptionLink>
           </Fragment>
         )}
-      </div>
-    </div>
+      </OptionsContainer>
+    </HeaderContainer>
   );
 };
 
