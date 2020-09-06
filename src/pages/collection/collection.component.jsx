@@ -6,11 +6,10 @@ import CollectionItem from "../../components/collection-item/collection-item.com
 import { selectCollection } from "../../redux/shop/selector";
 
 const CollectionPage = ({ collection }) => {
-  const { title, items } = collection;
-
   if (!collection) {
     return <h1>404</h1>;
   }
+  const { title, items } = collection;
 
   return (
     <div className="collection-page">
