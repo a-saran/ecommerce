@@ -1,19 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
-import { createStructuredSelector } from "reselect";
 
-import CollectionsOverView from "../../components/collections-overview/index";
-import CollectionPage from "../collection/collection.component";
 import { fetchCollectionsStartAsync } from "../../redux/shop/actions";
-import withSpinner from "../../components/spinner/spinner.component";
-import {
-  selectIsCollectionFetching,
-  selectIsCollectionLoaded
-} from "../../redux/shop/selector";
 
-const CollectionsOverViewWithSpinner = withSpinner(CollectionsOverView);
-const CollectionPageWithSpinner = withSpinner(CollectionPage);
+import CollectionsOverviewContainer from "../../components/collections-overview/collection-overview.container.jsx";
+import CollectionPageContainer from "../collection/collection.container";
 
 class ShopPage extends React.Component {
   componentDidMount() {
@@ -22,37 +14,23 @@ class ShopPage extends React.Component {
   }
 
   render() {
-    const { match, isFetching, isCollectionLoaded } = this.props;
+    const { match } = this.props;
 
     return (
       <div className="shop-page">
         <Route
           exact
           path={`${match.path}`}
-          render={props => (
-            <CollectionsOverViewWithSpinner isLoading={isFetching} {...props} />
-          )}
+          component={CollectionsOverviewContainer}
         />
         <Route
           exact
           path={`${match.path}/:collectionId`}
-          render={props => (
-            <CollectionPageWithSpinner
-              isLoading={!isCollectionLoaded}
-              {...props}
-            />
-          )}
+          component={CollectionPageContainer}
         />
       </div>
     );
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  isFetching: selectIsCollectionFetching,
-  isCollectionLoaded: selectIsCollectionLoaded
-});
-
-export default connect(mapStateToProps, { fetchCollectionsStartAsync })(
-  ShopPage
-);
+export default connect(null, { fetchCollectionsStartAsync })(ShopPage);
