@@ -14,7 +14,9 @@ import {
   OptionLink
 } from "./header.styles";
 
-const Header = ({ currentUser }) => {
+import { signOutStart } from "../../redux/user/actions";
+
+const Header = ({ currentUser, signOutStart }) => {
   return (
     <HeaderContainer>
       <LogoContainer to="/">
@@ -26,7 +28,7 @@ const Header = ({ currentUser }) => {
 
         {currentUser ? (
           <Fragment>
-            <OptionLink as="div" onClick={() => auth.signOut()}>
+            <OptionLink as="div" onClick={() => signOutStart()}>
               Sign Out
             </OptionLink>
             <CartIcon />
@@ -46,4 +48,8 @@ const mapStateToProps = state => ({
   currentUser: selectCurrentUser(state)
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+  signOutStart: () => dispatch(signOutStart())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
