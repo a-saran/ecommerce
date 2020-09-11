@@ -52,8 +52,16 @@ export const addCollectionAndDocuments = async (collectionKey, ObjectToAdd) => {
   return await batch.commit();
 };
 
-export const auth = firebase.auth();
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unSubscribe = auth.onAuthStateChanged(userAuth => {
+      unSubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
 
+export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
