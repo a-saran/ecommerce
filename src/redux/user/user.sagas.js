@@ -11,7 +11,9 @@ import {
   signInFailure,
   signInSuccess,
   signOutSuccess,
-  signOutFailure
+  signOutFailure,
+  signUpSuccess,
+  signUpFailure
 } from "./actions";
 
 // I know userRef and signInSuccess calls are repetitive - just left for a reference
@@ -76,6 +78,37 @@ export function* signOut() {
   }
 }
 
+export function* signUp({ payload: { email, password, displayName } }) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    yield put(
+      signUpSuccess({
+        user,
+        additionalData: {
+          displayName
+        }
+      })
+    );
+  } catch (error) {
+    yield put(signUpFailure(error));
+  }
+}
+
+export function* signInAfterSignUp({ payload: { user, additionalData } }) {
+  try {
+    const userRef = yield call(createUserProfile, user, additionalData);
+    const snapshot = yield userRef.get();
+    yield put(
+      signInSuccess({
+        id: snapshot.id,
+        ...snapshot.data()
+      })
+    );
+  } catch (error) {
+    put(signInFailure(error));
+  }
+}
+
 export function* onGoogleSignStart() {
   yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle);
 }
@@ -92,11 +125,21 @@ export function* onSignOutStart() {
   yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut);
 }
 
+export function* onSignUpStart() {
+  yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
+}
+
+export function* onSignUpSuccess() {
+  yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp);
+}
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignStart),
     call(onEmailSignInStart),
     call(onCheckUserSession),
-    call(onSignOutStart)
+    call(onSignOutStart),
+    call(onSignUpStart),
+    call(onSignUpSuccess)
   ]);
 }
