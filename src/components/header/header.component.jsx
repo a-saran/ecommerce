@@ -31,7 +31,6 @@ const Header = ({ currentUser, signOutStart }) => {
             <OptionLink as="div" onClick={() => signOutStart()}>
               Sign Out
             </OptionLink>
-            <CartIcon />
           </Fragment>
         ) : (
           <Fragment>
@@ -39,6 +38,7 @@ const Header = ({ currentUser, signOutStart }) => {
             <OptionLink to="/signup">SignUp</OptionLink>
           </Fragment>
         )}
+        <CartIcon />
       </OptionsContainer>
     </HeaderContainer>
   );
