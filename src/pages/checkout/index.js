@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -9,6 +10,20 @@ import CheckoutItem from "../../components/checkout-item";
 import StripeButton from "../../components/stripe-button/stripe-button.componenet";
 
 const Checkout = ({ cartItems, totalValue }) => {
+  if (!cartItems.length) {
+    return (
+      <div className="checkout-page">
+        <h2>No Items in the cart</h2>
+        <h4>
+          Add items{" "}
+          <Link className="link" to="/shop">
+            here.
+          </Link>
+        </h4>
+      </div>
+    );
+  }
+
   return (
     <div className="checkout-page">
       <div className="checkout-header">
