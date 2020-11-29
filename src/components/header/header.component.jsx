@@ -22,7 +22,7 @@ const Header = ({ currentUser, signOutStart }) => {
       </LogoContainer>
       <OptionsContainer>
         <OptionLink to="/shop">Shop</OptionLink>
-        <OptionLink to="/shop">Contact</OptionLink>
+        <OptionLink to="/contact">Contact</OptionLink>
 
         {currentUser ? (
           <Fragment>
