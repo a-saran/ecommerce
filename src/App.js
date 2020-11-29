@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 
+import { GlobalStyles } from "./global.styles";
+
 // Components
 import HomePage from "./pages/homepage/HomePage";
 import ShopPage from "./pages/shop/shop.component";
@@ -19,8 +21,6 @@ import Checkout from "./pages/checkout/index";
 import { selectCurrentUser } from "./redux/user/selector";
 import { checkUserSession } from "./redux/user/actions";
 
-import "./App.scss";
-
 const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
     checkUserSession();
@@ -28,6 +28,7 @@ const App = ({ checkUserSession, currentUser }) => {
 
   return (
     <Router>
+      <GlobalStyles />
       <div className="App">
         <Header />
         <Switch>

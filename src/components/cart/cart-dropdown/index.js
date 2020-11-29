@@ -22,6 +22,7 @@ const CartDropdown = ({ isOpen, cartItems, history, toggleDropDown }) => (
         toggleDropDown();
         history.push("/checkout");
       }}
+      style={{ marginTop: "10px" }}
     >
       Go To Checkout
     </CustomButton>
