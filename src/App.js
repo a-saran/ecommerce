@@ -19,6 +19,7 @@ import SignUp from "./components/sign-up/sign-up.component";
 import Checkout from "./pages/checkout/index";
 import ContactPage from "./pages/contactPage/contactPage.component";
 import ErrorBoundary from "./components/error-boundary/errorHandler.component";
+import ErrorPage from "./components/404/404.component";
 
 // Redux
 import { selectCurrentUser } from "./redux/user/selector";
@@ -34,8 +35,8 @@ const App = ({ checkUserSession, currentUser }) => {
       <GlobalStyles />
       <div className="App">
         <Header />
-        <Switch>
-          <ErrorBoundary>
+        <ErrorBoundary>
+          <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/shop" component={ShopPage} />
             <Route exact path="/checkout" component={Checkout} />
@@ -50,8 +51,9 @@ const App = ({ checkUserSession, currentUser }) => {
               path="/signup"
               render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
             />
-          </ErrorBoundary>
-        </Switch>
+            <Route component={ErrorPage} />
+          </Switch>
+        </ErrorBoundary>
       </div>
     </Router>
   );
