@@ -18,6 +18,8 @@ import SignIn from "./components/sign-in/sign-in.component";
 import SignUp from "./components/sign-up/sign-up.component";
 import Checkout from "./pages/checkout/index";
 import ContactPage from "./pages/contactPage/contactPage.component";
+import ErrorBoundary from "./components/error-boundary/errorHandler.component";
+
 // Redux
 import { selectCurrentUser } from "./redux/user/selector";
 import { checkUserSession } from "./redux/user/actions";
@@ -33,20 +35,22 @@ const App = ({ checkUserSession, currentUser }) => {
       <div className="App">
         <Header />
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={Checkout} />
-          <Route exact path="/contact" component={ContactPage} />
-          <Route
-            exact
-            path="/signin"
-            render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
-          />
-          <Route
-            exact
-            path="/signup"
-            render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
-          />
+          <ErrorBoundary>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/shop" component={ShopPage} />
+            <Route exact path="/checkout" component={Checkout} />
+            <Route exact path="/contact" component={ContactPage} />
+            <Route
+              exact
+              path="/signin"
+              render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
+            />
+            <Route
+              exact
+              path="/signup"
+              render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
+            />
+          </ErrorBoundary>
         </Switch>
       </div>
     </Router>
