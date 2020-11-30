@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ErrorPage from "../404/404.component";
 
 class ErrorBoundary extends Component {
   constructor() {
@@ -23,7 +24,7 @@ class ErrorBoundary extends Component {
     const { hasError } = this.state;
 
     if (hasError) {
-      return <div>SomeThing Went wrong</div>;
+      return <ErrorPage />;
     }
 
     return this.props.children;
